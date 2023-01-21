@@ -1,10 +1,23 @@
 <script lang="ts">
+  import type { Ai } from "../../lib/ai";
 
+  import InfoPanel from "./InfoPanel.svelte";
+  import Board from "./Board.svelte";
+
+  export let view: string;
+  export let name: string;
+  export let boardSize: number;
+  export let ai: Ai;
 </script>
 
-<p>info panel</p>
-<p>board</p>
+<InfoPanel {name} {boardSize} {ai} />
+<Board />
+
+<button
+  on:click={() => {
+    view = "settings";
+  }}>Settings</button
+>
 
 <style>
-
 </style>

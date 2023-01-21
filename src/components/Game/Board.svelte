@@ -1,7 +1,7 @@
 <script lang="ts">
-
 </script>
 
-<style>
+<h2>board</h2>
 
+<style>
 </style>
