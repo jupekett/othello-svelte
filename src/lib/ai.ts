@@ -26,7 +26,7 @@ export class RandomAi implements Ai {
   }
 }
 
-// Chooses move that flip most opponent disks
+// Chooses move that flips most opponent disks
 export class GreedyAi implements Ai {
   name: string;
   constructor() {

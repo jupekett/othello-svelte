@@ -8,10 +8,14 @@
   export let name: string;
   export let boardSize: number;
   export let ai: Ai;
+
+  let playerScore = 0;
+  let aiScore = 0;
+  let emptyCells: number;
 </script>
 
 <InfoPanel {name} {boardSize} {ai} />
-<Board />
+<Board {boardSize} />
 
 <button
   on:click={() => {

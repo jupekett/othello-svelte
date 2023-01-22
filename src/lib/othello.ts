@@ -1,6 +1,6 @@
 // rules and related calculations
 
-export enum SquareStatus {
+export enum CellStatus {
   Empty,
   PlayerDisk,
   AiDisk,
@@ -8,20 +8,20 @@ export enum SquareStatus {
 }
 
 export type Position = {
-  x: number;
-  y: number;
+  i: number;
+  j: number;
 };
 
-export type Square = {
+export type Cell = {
   position: Position;
-  status: SquareStatus;
+  status: CellStatus;
 };
 
 export type Move = {
   position: Position;
-  flippables: Square[];
+  flippables: Cell[];
 };
 
-export type Board = Square[][];
+export type Board = Cell[][];
 
-export type Flippables = Square[];
+export type Flippables = Cell[];
