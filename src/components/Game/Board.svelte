@@ -39,34 +39,65 @@
 
   export let boardSize = 8;
   let board = createStartingBoard(boardSize);
-  let cellSizePixels = 40;
+  let boardHeight: number;
+  let boardWidth: number;
+  // $: console.log(boardHeight);
+  $: cellSizePixels =
+    boardHeight < boardWidth ? boardHeight / boardSize : boardWidth / boardSize;
 </script>
 
-<div
-  id="board"
-  style:grid-template-columns="repeat({boardSize}, {cellSizePixels}px)"
->
-  {#each board as row, i}
-    {#each row as cell, j}
-      <div
-        id="i{i}j{j}"
-        class="cell {cell.status === CellStatus.LegalMove ? 'legal' : ''}"
-        style:height="{cellSizePixels}px"
-        style:width="{cellSizePixels}px"
-      >
-        {#if cell.status === CellStatus.PlayerDisk}
-          <div class="disk player" />
-        {:else if cell.status === CellStatus.AiDisk}
-          <div class="disk ai" />
-        {/if}
-      </div>
+<section>
+  <div id="left-fill" />
+  <div
+    id="board"
+    bind:clientHeight={boardHeight}
+    bind:clientWidth={boardWidth}
+    style:grid-template-columns="repeat({boardSize}, {cellSizePixels}px)"
+  >
+    {#each board as row, i}
+      {#each row as cell, j}
+        <div
+          id="i{i}j{j}"
+          class="cell {cell.status === CellStatus.LegalMove ? 'legal' : ''}"
+          style:height="{cellSizePixels}px"
+          style:width="{cellSizePixels}px"
+        >
+          {#if cell.status === CellStatus.PlayerDisk}
+            <div class="disk player" />
+          {:else if cell.status === CellStatus.AiDisk}
+            <div class="disk ai" />
+          {/if}
+        </div>
+      {/each}
     {/each}
-  {/each}
-</div>
+  </div>
+  <div id="right-fill" />
+</section>
 
 <style>
+  section {
+    height: 100%;
+    width: 100%;
+
+    display: flex;
+    align-content: center;
+  }
+
+  #left-fill, #right-fill {
+    flex-grow: 1;
+  }
+
   #board {
+    max-height: 100%;
+    max-width: 100%;
+    /* margin: auto; */
     display: grid;
+    column-gap: 0px;
+    row-gap: 0px;
+
+    flex-grow: 1;
+    /* align-self: center; */
+    /* flex-shrink: 3; */
   }
   .cell {
     border: 1px solid rgb(173, 255, 126);
